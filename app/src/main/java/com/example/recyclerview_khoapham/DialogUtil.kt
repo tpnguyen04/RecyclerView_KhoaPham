@@ -10,9 +10,9 @@ import java.util.Date
 
 class DialogUtil {
     companion object {
-        fun showAddBookDialog(context: Context, onListenAddBookSuccess: ((String, String, String, String) -> Unit)? = null ) {
+        fun showAddBookDialog(context: Context, onListenerDialog: OnListenerDialog? = null) {
             Dialog(context).apply {
-                this.setContentView(R.layout.layout_add_book_dialog)
+                setContentView(R.layout.layout_add_book_dialog)
 
                 // set window
                 window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
@@ -31,30 +31,33 @@ class DialogUtil {
                     val bookDescription = edtBookDescription.text.toString()
 
                     // set dieu kien de khong empty
-                    if (bookName.isBlank()) {
-                        edtBookName.error = "Book name cannot be empty"
-                    } else if(bookPostDate.isBlank()) {
-                        edtBookPostDate.error = ("Book post date cannot be empty")
-                    } else if(bookViewCount.isBlank()) {
-                        edtBookViewCount.error = ("Book view count cannot be empty")
-                    } else if(bookDescription.isBlank()) {
-                        edtBookDescription.error = ("Book description cannot be empty")
-                    } else {
-                        onListenAddBookSuccess?.invoke(bookName, bookPostDate,
-                            bookViewCount, bookDescription)
-                        this.dismiss()
-                        Toast.makeText(context, "Book Adding Successfully", Toast.LENGTH_SHORT).show()
+                    when {
+                        bookName.isBlank() -> edtBookName.error = "Book name cannot be empty"
+                        bookPostDate.isBlank() -> edtBookPostDate.error = "Book post date cannot be empty"
+                        bookViewCount.isBlank() -> edtBookViewCount.error = "Book view count cannot be empty"
+                        bookDescription.isBlank() -> edtBookDescription.error = "Book description cannot be empty"
+                        else -> onListenerDialog?.addBook(
+                            dialog = this,
+                            name = bookName,
+                            postDate = bookPostDate,
+                            viewCount = bookViewCount,
+                            description = bookDescription
+                        )
                     }
                 }
-                // Display dialog
-                this.show()
 
+                show()
             }
-
         }
     }
 }
-//
-//interface onListenAddBook {
-//    fun addBookSuceess (bookName: String, bookPostDate: String, bookViewCount: Int, bookDescription: String )
-//}
+
+interface OnListenerDialog {
+    fun addBook(
+        dialog: Dialog,
+        name: String,
+        postDate: String,
+        viewCount: String,
+        description: String
+    )
+}
