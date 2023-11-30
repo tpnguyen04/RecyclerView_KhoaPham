@@ -17,6 +17,8 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
         this.listBook = listBook
     }
 
+    fun getListBook(): List<Book> = listBook
+
     inner class BookViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private var image: ImageView = view.findViewById(R.id.image_view_book)
         private var tvName: TextView = view.findViewById(R.id.text_view_book_name)
@@ -37,7 +39,7 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
                 image.setImageResource(it.image)
                 tvName.text = it.name
                 tvPostDateAndViewCount.text = SpannableStringBuilder().apply {
-                    append("Ngày đăng ${it.postDate}")
+                    append("Ngày đăng ${DateUtil.convertMilliSecondToString(it.postDate.time)}")
                     append(" - ")
                     append("Lượt xem: ${it.viewCount}", )
                 }

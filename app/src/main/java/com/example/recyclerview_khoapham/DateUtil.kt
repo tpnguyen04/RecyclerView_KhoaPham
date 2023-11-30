@@ -3,6 +3,7 @@ package com.example.recyclerview_khoapham
 import android.annotation.SuppressLint
 import android.text.format.DateFormat
 import java.text.SimpleDateFormat
+import java.util.Date
 
 class DateUtil {
     companion object {
@@ -27,5 +28,7 @@ class DateUtil {
         fun convertMilliSecondToString(milliSeconds: Long): String {
             return DateFormat.format("dd/MM/yyyy", milliSeconds).toString();
         }
+
+        fun getCurrentDate() = Date(System.currentTimeMillis())
     }
 }
