@@ -3,4 +3,10 @@
     <string name="book2_title">Hãy yêu đời dẫu đời có trái ngang - Lời nhắn gửi đến bạn một đời hạnh phúc</string>
     <string name="ngaydang_luotxem_book2">Ngày đăng: 20/11/2023 - Lượt xem: 173</string>
     <string name="mota_book2">“Hãy yêu đời dẫu đời có trái ngang” một tập thơ truyền năng lượng tích cực đến người trẻ, dẫu có khó khăn, mệt mỏi, áp lực chỉ hy vọng bạn không...</string>
+    <string-array name="spinnerList">
+        <item>Ngày đăng tải</item>
+        <item>Lượt xem</item>
+        <item>Tên sách</item>
+
+    </string-array>
 </resources>
